@@ -25,6 +25,19 @@ PREDEFINED_QUESTIONS = [
     "What is the average earnings per region?",
     "Which region has the most expert freelancers?",
     "How many freelancers completed more than 100 projects?",
+    # CUSTOM EXTRA QUESTIONS:
+    "What is the average hourly rate by payment method?",
+    "Do expert freelancers earn more on average than intermediate or beginner ones?",
+    "Which country has the highest concentration of high-earning freelancers?",
+    "What percentage of freelancers who accept cryptocurrency have completed over 50 projects?",
+    "What is the median earnings of freelancers with more than 10 years of experience?",
+    "Is there a correlation between freelancer level and number of completed projects?",
+    "Which job categories have the highest average earnings?",
+    "What is the distribution of freelancer levels per region?",
+    "How many freelancers have completed projects but reported zero earnings?",
+    "Which regions have the most freelancers accepting cryptocurrency?",
+    "What is the average project count for freelancers in each region?",
+    "Among freelancers who are beginners, what is the most common job category?",
 ]
 
 
