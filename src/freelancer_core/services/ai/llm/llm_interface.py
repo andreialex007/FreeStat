@@ -2,5 +2,5 @@ from abc import ABC, abstractmethod
 
 class LLMInterface(ABC):
     @abstractmethod
-    async def ask_ai(self, question: str, schema: str, table_name: str) -> str:
+    async def ask(self, question: str) -> str:
         pass

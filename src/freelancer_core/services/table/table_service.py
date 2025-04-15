@@ -1,10 +1,12 @@
 import asyncio
+import sqlite3
 from typing import Any
 import pandas as pd
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import text
+from sqlalchemy import text, MetaData, Table, Integer, Float, String, Column
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy import inspect
+from sqlalchemy.sql.sqltypes import NullType
 
 from src.freelancer_core.services.table.table_interface import TableServiceInterface
 
@@ -14,11 +16,14 @@ class TableService(TableServiceInterface):
         self.session = session
 
     async def bulk_insert(self, df: pd.DataFrame, table_name: str):
-        records = df.to_dict(orient="records")
-        stmt = insert(text(table_name)).values(records)
+        url = str(self.session.bind.url)
+        if not url.startswith("sqlite"):
+            raise RuntimeError("This bulk_insert is implemented only for SQLite.")
 
-        async with self.session.begin():
-            await self.session.execute(stmt)
+        db_path = url.split("///")[-1]
+
+        with sqlite3.connect(db_path) as conn:
+            df.to_sql(table_name, conn, index=False, if_exists="append")
 
     async def execute_raw_sql(self, sql: str) -> list[tuple[Any]]:
         async with self.session.begin():
@@ -26,7 +31,10 @@ class TableService(TableServiceInterface):
             return result.fetchall()
 
     async def get_table_schema(self, table_name: str) -> str:
-        async with self.session.begin():
-            inspector = inspect(self.session)
-            columns = await asyncio.to_thread(inspector.get_columns, table_name)
-            return "\n".join(f"{col['name']} ({col['type']})" for col in columns)
+        async with self.session.bind.connect() as conn:
+            def _inspect(sync_conn):
+                inspector = inspect(sync_conn)
+                columns = inspector.get_columns(table_name)
+                return ", ".join(f"{col['name']} {col['type']}" for col in columns)
+
+            return await conn.run_sync(_inspect)
