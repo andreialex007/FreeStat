@@ -1,13 +1,21 @@
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry]
 name = "freelancer-stat"
 version = "0.1.0"
 description = "CLI analyzer of freelancer earnings using GPT and PostgreSQL"
 authors = ["Author name <you@example.com>"]
 readme = "README.md"
-packages = [
-    { include = "freelancer_core", from = "src" },
-    { include = "freelancer_app", from = "src" }
-]
+
+[[tool.poetry.packages]]
+include = "freelancer_core"
+from = "src"
+
+[[tool.poetry.packages]]
+include = "freelancer_app"
+from = "src"
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -18,7 +26,9 @@ sqlalchemy = "^2.0.29"
 punq = "^0.7.0"
 aiosqlite = "^0.21.0"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+pytest-asyncio = "^0.26.0"
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
