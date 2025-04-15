@@ -28,7 +28,7 @@ A command-line tool for analyzing freelancer earnings using natural language que
 1. Install [Poetry](https://python-poetry.org/docs/).
 2. Clone the repository and navigate into it.
 3. Run `poetry install` to install dependencies.
-4. Make sure your `.env` file contains `OPENAI_API_KEY=your_key_here`
+4. Make sure your environment contains `OPENAI_API_KEY`
 5. Run with: `poetry run python src/freelancer_app/cli_async.py`
 
 ## Technologies Used
