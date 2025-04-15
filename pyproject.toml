@@ -1,10 +1,13 @@
 [tool.poetry]
 name = "freelancer-stat"
 version = "0.1.0"
-description = "CLI-анализатор фрилансеров"
+description = "CLI analyzer of freelancer earnings using GPT and PostgreSQL"
 authors = ["Author name <you@example.com>"]
 readme = "README.md"
-packages = [{ include = "freelancer_gpt_sql" }]
+packages = [
+    { include = "freelancer_core", from = "src" },
+    { include = "freelancer_app", from = "src" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -14,7 +17,7 @@ python-dotenv = "^1.0.1"
 sqlalchemy = "^2.0.29"
 asyncpg = "^0.29.0"
 
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
