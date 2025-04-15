@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "freelancer-stat"
+version = "0.1.0"
+description = "CLI-анализатор фрилансеров"
+authors = ["Author name <you@example.com>"]
+readme = "README.md"
+packages = [{ include = "freelancer_gpt_sql" }]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pandas = "^2.2.2"
+openai = "^1.14.3"
+python-dotenv = "^1.0.1"
+sqlalchemy = "^2.0.29"
+asyncpg = "^0.29.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
