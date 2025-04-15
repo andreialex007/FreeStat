@@ -1,6 +1,6 @@
 from langchain_core.language_models import BaseChatModel
 from langchain_core.messages import HumanMessage
-from src.freelancer_core.llm_interface import LLMInterface
+from src.freelancer_core.services.ai.llm.llm_interface import LLMInterface
 
 class LLMService(LLMInterface):
     def __init__(self, llm: BaseChatModel):

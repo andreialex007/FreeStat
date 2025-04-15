@@ -1,5 +1,5 @@
-from src.freelancer_core.llm_interface import LLMInterface
-from src.freelancer_core.llm_question_interface import LLMQuestionServiceInterface
+from src.freelancer_core.services.ai.llm.llm_interface import LLMInterface
+from src.freelancer_core.services.ai.questions.llm_question_interface import LLMQuestionServiceInterface
 
 class LLMQuestionService(LLMQuestionServiceInterface):
     def __init__(self, llm: LLMInterface):
